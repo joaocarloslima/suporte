@@ -1,51 +1,49 @@
-<?php include "cabecalho.php" ?>
+<?php
+require_once "../global.php";
+require_once "../classes/Usuario.php";
+
+$usuario = new Usuario();
+$listaUsuarios = $usuario->buscarTodos();
+
+?>
+
+<?php include "cabecalho.php"; ?>
+
 <br>
 <button class="ui button teal" id="btnNovo">
   <i class="icon plus"></i>
   Novo usuário
 </button>
-<table class="ui teal celled padded table datatable" id="datatable" >
-  <thead>
-    <th></th>
-    <th class="center aligned">#</th>
-    <th>Matrícula</th>
-    <th>Nome</th>
-    <th>Email</th>
-    <th>Perfil</th>
-    <th>Ações</th>
-  </tr></thead>
-  <tbody>
-    <tr>
-      <td class="center aligned"><img class="ui avatar image" src="../fotos/42919.jpg"></td>
-      <td class="center aligned">1</td>
-      <td>42919</td>
-      <td class="single line">João Carlos Lima e Silva</td>
-      <td>joaocarloslima@me.com</td>
-      <td>Super Administrador</td>
-      <td>
-        <div class="ui small basic icon buttons">
-          <button class="ui button"><i class="comment icon"></i></button>
-          <button class="ui button"><i class="pencil icon"></i></button>
-          <button class="ui red button" onclick="excluir()"><i class="trash icon"></i></button>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td class="center aligned"><img class="ui avatar image" src="../fotos/65594.jpg"></td>
-      <td class="center aligned">4</td>
-      <td>42919</td>
-      <td class="single line">Renata Borges</td>
-      <td>joaocarloslima@me.com</td>
-      <td>Super Administrador</td>
-      <td>
-        <div class="ui small basic icon buttons">
-          <button class="ui button"><i class="comment icon"></i></button>
-          <button class="ui button"><i class="pencil icon"></i></button>
-          <button class="ui red button" onclick="excluir()"><i class="trash icon"></i></button>
-        </div>
-      </td>
-    </tr>
-  </tbody>
+<table class="ui teal celled padded table datatable" id="datatable">
+    <thead>
+        <th class="center aligned">#</th>
+        <th>Matrícula</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Perfil</th>
+        <th>Ações</th>
+        </tr>
+  </thead>
+
+    <tbody>
+        <?php foreach ($listaUsuarios as $usuario) : ?>
+            <tr>
+                <td class="center aligned"> IMAGE <img class="ui avatar image" src="../fotos/<?= $usuario['matricula']?>.jpg"></td>
+                <td class="center aligned"><?= $usuario['id'] ?></td>
+                <td><?= $usuario['matricula']?></td>
+                <td class="single line"><?= $usuario['nome']?></td>
+                <td><?= $usuario['email']?></td>
+                <td><?= $usuario['matricula'] = 1?'Administrador':'Usuario'?></td>
+                <td>
+                <div class="ui small basic icon buttons">
+                    <button class="ui button"><i class="comment icon"></i></button>
+                    <button class="ui button"><i class="pencil icon"></i></button>
+                    <button class="ui red button" onclick="excluir()"><i class="trash icon"></i></button>
+                </div>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
 </table>
 
 
@@ -124,16 +122,13 @@
 <?php include "rodape.php" ?>
 
 <script type="text/javascript">
-  $('#btnNovo').on("click", function(){
+  $('#btnNovo').on("click", function() {
     $('#modalinserir').modal('show');
   });
 
-  function excluir(){
+  function excluir() {
     $('#modalexcluir').modal('show');
   }
 
   $('.dropdown').dropdown();
-
-
 </script>
-

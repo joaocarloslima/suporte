@@ -1,4 +1,5 @@
 <?php
+require("../classes/Conexao.php");
 
 class Usuario{
 	public $matricula;
@@ -20,5 +21,12 @@ class Usuario{
 	    	$this->email = $linha["email"];
 	    }
 
+	}
+
+	public function buscarTodos(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM usuarios";
+        $stmt = $conexao->query($query);
+        return $stmt->fetchAll();
 	}
 }
