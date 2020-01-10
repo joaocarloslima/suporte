@@ -1,9 +1,9 @@
 <?php
-require("../classes/Conexao.php");
 
 class Usuario{
 	public $id;
 	public $matricula;
+	public $nome;
 	public $senha;
 	public $email;
 	public $pefil;
@@ -20,6 +20,7 @@ class Usuario{
 	    	$this->logado = true;
 	    	$this->perfil = $linha["perfil"];
 	    	$this->email = $linha["email"];
+	    	$this->nome = $linha["nome"];
 	    }
 
 	}
@@ -80,6 +81,37 @@ class Usuario{
 			$_SESSION["red"] = "Error ao alterar usuario. <br><br>[$e]";
 		}
 	}
+
+	public function carregar(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM usuarios WHERE matricula=:matricula";
+	    $stmt = $conexao->prepare($query);
+	    $stmt->bindValue(":matricula", $this->matricula);
+	    $stmt->execute();
+	    if ($linha = $stmt->fetch()) {
+	    	$this->id = $linha["id"];
+	    	$this->nome = $linha["nome"];
+	    	$this->email = $linha["email"];
+	    	$this->perfil = $linha["perfil"];
+	    	$this->senha = $linha["senha"];
+	    }
+	}
+
+	public function alterarSenha(){
+		$conexao = Conexao::pegarConexao();
+		$query = "UPDATE usuarios SET senha=md5(:senha) WHERE id=:id";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":senha", $this->senha);
+		$stmt->bindValue(":id", $this->id);
+
+		try{
+			$stmt->execute();
+			$_SESSION["green"] = "Senha alterada com sucsso";
+		}catch(\Throwable $e){
+			$_SESSION["red"] = "Error ao alterar senha. <br><br>[$e]";
+		}
+	}
+
 
 
 }
