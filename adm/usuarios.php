@@ -1,7 +1,6 @@
 <?php
 include "../notificacao.php";
 require_once "../global.php";
-require_once "../classes/Usuario.php";
 
 // Apagar usuario
 if (isset($_POST["idApagar"])) {
