@@ -52,7 +52,7 @@ if(isset($_POST["idEditar"]) && $_POST["idEditar"] != ""){
 <br>
 <button class="ui button teal" id="btnNovo">
   <i class="icon plus"></i>
-  Novo usuário
+  Novo usuário 
 </button>
 <table class="ui teal celled padded table datatable" id="datatable">
   <thead>
@@ -66,14 +66,25 @@ if(isset($_POST["idEditar"]) && $_POST["idEditar"] != ""){
   </thead>
 
   <tbody>
-    <?php foreach ($listaUsuarios as $usuario) : ?>
+    <?php foreach ($listaUsuarios as $usuario) : 
+      $arquivo = "../fotos/".(string)$usuario['matricula'].".jpg"; 
+
+      if($usuario["perfil"] == 0 )
+          $usuario["perfil"] = "Usuario";
+      elseif($usuario["perfil"] == 1 )
+          $usuario["perfil"] = "Administrados";
+      else
+          $usuario["perfil"] = "Tecnico";
+    ?>
+
       <tr>
-        <td class="center aligned"><img class="ui avatar image" src="../fotos/<?= is_file("../fotos/".(string)$usuario['matricula'])."jpg"?$usuario['matricula'] :'semFoto' ?>.jpg"></td>
+        <td class="center aligned"><img class="ui avatar image" src="../fotos/<?= is_file($arquivo) == true?$usuario['matricula'] :'semFoto' ?>.jpg"></td>
         <td><?= $usuario['matricula'] ?></td>
         <td class="single line"><?= $usuario['nome'] ?></td>
         <td><?= $usuario['email'] ?></td>
-        <td><?=$usuario['perfil'] = 1 ? 'Administrador' : 'Usuario' ?></td>
+        <td><?=$usuario['perfil'] ?></td>
         <td>
+
           <div class="ui small basic icon buttons">
             <button class="ui button"><i class="comment icon"></i></button>
             <button class="ui button"  onclick="editar('<?=$usuario['id'] ?>', '<?=$usuario['matricula'] ?>', 
