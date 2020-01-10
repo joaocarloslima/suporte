@@ -4,36 +4,35 @@ require_once "../global.php";
 require_once "../classes/Usuario.php";
 
 // Apagar usuario
-if (isset($_POST["idApagar"])){
-    $usuario = new Usuario();
-    $usuario->id = $_POST["idApagar"];
+if (isset($_POST["idApagar"])) {
+  $usuario = new Usuario();
+  $usuario->id = $_POST["idApagar"];
 
-    $usuario->apagar();
+  $usuario->apagar();
 }
 
 // Inserir
-if (isset($_POST["matricula"]) && $_POST["idEditar"] == ""){
-    $usuario = new Usuario();
-    $usuario->matricula = $_POST["matricula"];
-    $usuario->nome = $_POST["nome"];
-    $usuario->email = $_POST["email"];
-    $usuario->perfil = $_POST["perfil"];
-    $usuario->senha = $_POST["senha"];
+if (isset($_POST["matricula"]) && $_POST["idEditar"] == "") {
+  $usuario = new Usuario();
+  $usuario->matricula = $_POST["matricula"];
+  $usuario->nome = $_POST["nome"];
+  $usuario->email = $_POST["email"];
+  $usuario->perfil = $_POST["perfil"];
+  $usuario->senha = $_POST["senha"];
 
-    $usuario->inserir();
+  $usuario->inserir();
 }
 
 // Atualizar
-if(isset($_POST["idEditar"]) && $_POST["idEditar"] != ""){
-    $usuario = new Usuario();
-    $usuario->id = $_POST["idEditar"];
-    $usuario->matricula = $_POST["matricula"];
-    $usuario->nome = $_POST["nome"];
-    $usuario->email = $_POST["email"];
-    $usuario->perfil = $_POST["perfil"];
-    $usuario->senha = $_POST["senha"];
+if (isset($_POST["idEditar"]) && $_POST["idEditar"] != "") {
+  $usuario = new Usuario();
+  $usuario->id = $_POST["idEditar"];
+  $usuario->matricula = $_POST["matricula"];
+  $usuario->nome = $_POST["nome"];
+  $usuario->email = $_POST["email"];
+  $usuario->perfil = $_POST["perfil"];
 
-    $usuario->atualizar();
+  $usuario->atualizar();
 }
 
 // Listagem de usuarios
@@ -45,14 +44,14 @@ $listaUsuarios = $usuario->buscarTodos();
 <?php include "cabecalho.php"; ?>
 
 <?php
-    mostrarNotificacao('red');
-    mostrarNotificacao('green');
+mostrarNotificacao('red');
+mostrarNotificacao('green');
 ?>
 
 <br>
 <button class="ui button teal" id="btnNovo">
   <i class="icon plus"></i>
-  Novo usuário 
+  Novo usuário
 </button>
 <table class="ui teal celled padded table datatable" id="datatable">
   <thead>
@@ -66,13 +65,13 @@ $listaUsuarios = $usuario->buscarTodos();
   </thead>
 
   <tbody>
-    <?php foreach ($listaUsuarios as $usuario) : 
-      $arquivo = "../fotos/".(string)$usuario['matricula'].".jpg"; 
+    <?php foreach ($listaUsuarios as $usuario) :
+      $arquivo = "../fotos/" . (string) $usuario['matricula'] . ".jpg";
       $perfil = PERFIS[$usuario["perfil"]];
     ?>
 
       <tr>
-        <td class="center aligned"><img class="ui avatar image" src="../fotos/<?= is_file($arquivo) == true?$usuario['matricula'] :'semFoto' ?>.jpg"></td>
+        <td class="center aligned"><img class="ui avatar image" src="../fotos/<?= is_file($arquivo) == true ? $usuario['matricula'] : 'semFoto' ?>.jpg"></td>
         <td><?= $usuario['matricula'] ?></td>
         <td class="single line"><?= $usuario['nome'] ?></td>
         <td><?= $usuario['email'] ?></td>
@@ -81,9 +80,9 @@ $listaUsuarios = $usuario->buscarTodos();
 
           <div class="ui small basic icon buttons">
             <button class="ui button"><i class="comment icon"></i></button>
-            <button class="ui button"  onclick="editar('<?=$usuario['id'] ?>', '<?=$usuario['matricula'] ?>', 
-                '<?=$usuario['nome'] ?>', '<?=$usuario['email'] ?>', '<?=$usuario['perfil'] ?>', '<?=$usuario['senha'] ?>')">
-                <i class="pencil icon"></i>
+            <button class="ui button" onclick="editar('<?= $usuario['id'] ?>', '<?= $usuario['matricula'] ?>', 
+                '<?= $usuario['nome'] ?>', '<?= $usuario['email'] ?>', '<?= $usuario['perfil'] ?>', '<?= $usuario['senha'] ?>')">
+              <i class="pencil icon"></i>
             </button>
             <button class="ui red button" onclick="excluir(<?= $usuario['id'] ?>)"> <i class="trash icon"></i></button>
           </div>
@@ -107,18 +106,18 @@ $listaUsuarios = $usuario->buscarTodos();
         </div>
         <div class="field">
           <label>Perfil</label>
-          <div class="ui fluid selection dropdown">
-            <input type="hidden" name="perfil" id='campo-perfil'>
+          <div class="ui fluid selection dropdown" id='campo-perfil'>
+            <input type="hidden" name="perfil">
             <i class="dropdown icon"></i>
             <div class="default text">selecione</div>
             <div class="menu">
-              <div class="item" data-value = 0 data-text="Usuário">
+              <div class="item" data-value=0 data-text="Usuário">
                 <i class="ui avatar icon user outline"></i> Usuário
               </div>
-              <div class="item" data-value = 2 data-text="Técnico">
+              <div class="item" data-value=2 data-text="Técnico">
                 <i class="ui avatar icon user"></i> Técnico
               </div>
-              <div class="item" data-value = 1 data-text="Administrador">
+              <div class="item" data-value=1 data-text="Administrador">
                 <i class="ui avatar icon user secret"></i> Administrador
               </div>
             </div>
@@ -131,21 +130,21 @@ $listaUsuarios = $usuario->buscarTodos();
       </div>
       <div class="two fields">
         <div class="field">
-            <label>E-mail</label>
-            <input type="email" name="email" placeholder="e-mail de contato" id='campo-email'>
+          <label>E-mail</label>
+          <input type="email" name="email" placeholder="e-mail de contato" id='campo-email'>
         </div>
         <div class="field">
           <label>Senha</label>
           <input type="password" name="senha" placeholder="senha de acesso" id='campo-senha'>
         </div>
-         </div>
+      </div>
 
-        </div>
-        <div class="actions">
-            <div class="ui cancel button">Cancelar</div>
-            <button type="submit" class="ui teal approve button">Salvar</button>
-        </div>
-    </form>
+  </div>
+  <div class="actions">
+    <div class="ui cancel button">Cancelar</div>
+    <button type="submit" class="ui teal approve button">Salvar</button>
+  </div>
+  </form>
 </div>
 
 <!-- modal exluir-->
@@ -158,7 +157,7 @@ $listaUsuarios = $usuario->buscarTodos();
     <p>Tem certeza que deseja apagar esse usuário? Todos os dados relacionados a ele serão perdidos. Essa ação não poderá ser desfeita</p>
   </div>
 
-  <form action="usuarios.php" method="POST">  
+  <form action="usuarios.php" method="POST">
     <input type="hidden" name="idApagar" id="id-apagar">
     <div class="actions">
       <div class="ui green basic cancel inverted button">
@@ -175,30 +174,29 @@ $listaUsuarios = $usuario->buscarTodos();
 <?php include "rodape.php" ?>
 
 <script type="text/javascript">
-
-    $('#btnNovo').on("click", function() {
+  $('#btnNovo').on("click", function() {
     $('#campo-id').val("");
     $('#campo-matricula').val("");
     $('#campo-nome').val("");
     $('#campo-email').val("");
-    $('#campo-perfil').val("Selecione");
-    $('#campo-senha').val("");
+    $('#campo-perfil').dropdown('clear');
+    $('#campo-senha').parent().show();
     $('#modalinserir').modal('show');
   });
 
-  function editar($id, $matricula, $nome, $email, $perfil, $senha){
+  function editar($id, $matricula, $nome, $email, $perfil, $senha) {
     $('#campo-id').val($id);
     $('#campo-matricula').val($matricula);
     $('#campo-nome').val($nome);
     $('#campo-email').val($email);
-    $('#campo-perfil').val("Selecione");
-    $('#campo-senha').val($senha);
+    $('#campo-perfil').dropdown('set selected', $perfil);
+    $('#campo-senha').parent().hide();
     $('#modalinserir').modal("show");
   }
 
   function excluir($id) {
-      $('#id-apagar').val($id);
-      $('#modalexcluir').modal('show');
+    $('#id-apagar').val($id);
+    $('#modalexcluir').modal('show');
   }
 
   $('.dropdown').dropdown();

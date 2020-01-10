@@ -65,13 +65,12 @@ class Usuario{
 	public function atualizar(){
 		$conexao = Conexao::pegarConexao();
 		$query = "UPDATE usuarios SET matricula=:matricula, nome=:nome, email=:email, 
-				  perfil=:perfil, senha=:senha WHERE id=:id";
+				  perfil=:perfil WHERE id=:id";
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(":matricula", $this->matricula);
 		$stmt->bindValue(":nome", $this->nome);
 		$stmt->bindValue(":email", $this->email);
 		$stmt->bindValue(":perfil", $this->perfil);
-		$stmt->bindValue(":senha", $this->senha);
 		$stmt->bindValue(":id", $this->id);
 
 		try{
