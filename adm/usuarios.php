@@ -68,13 +68,7 @@ $listaUsuarios = $usuario->buscarTodos();
   <tbody>
     <?php foreach ($listaUsuarios as $usuario) : 
       $arquivo = "../fotos/".(string)$usuario['matricula'].".jpg"; 
-
-      if($usuario["perfil"] == 0 )
-          $usuario["perfil"] = "Usuario";
-      elseif($usuario["perfil"] == 1 )
-          $usuario["perfil"] = "Administrados";
-      else
-          $usuario["perfil"] = "Tecnico";
+      $perfil = PERFIS[$usuario["perfil"]];
     ?>
 
       <tr>
@@ -82,7 +76,7 @@ $listaUsuarios = $usuario->buscarTodos();
         <td><?= $usuario['matricula'] ?></td>
         <td class="single line"><?= $usuario['nome'] ?></td>
         <td><?= $usuario['email'] ?></td>
-        <td><?=$usuario['perfil'] ?></td>
+        <td><?= $perfil ?></td>
         <td>
 
           <div class="ui small basic icon buttons">

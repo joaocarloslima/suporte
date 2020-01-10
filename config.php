@@ -5,3 +5,5 @@ define('DB_DATABASE', 'suporte');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DEBUG', true);
+
+define("PERFIS", array("Usuário", "Administrador", "Técnico"));
