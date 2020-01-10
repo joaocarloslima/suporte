@@ -3,10 +3,6 @@ include "../notificacao.php";
 require_once "../global.php";
 require_once "../classes/Usuario.php";
 
-// Listagem de usuarios
-$usuario = new Usuario();
-$listaUsuarios = $usuario->buscarTodos();
-
 // Apagar usuario
 if (isset($_POST["idApagar"])){
     $usuario = new Usuario();
@@ -39,6 +35,10 @@ if(isset($_POST["idEditar"]) && $_POST["idEditar"] != ""){
 
     $usuario->atualizar();
 }
+
+// Listagem de usuarios
+$usuario = new Usuario();
+$listaUsuarios = $usuario->buscarTodos();
 
 ?>
 
