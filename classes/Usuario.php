@@ -1,6 +1,8 @@
 <?php
+require("../classes/Conexao.php");
 
 class Usuario{
+	public $id;
 	public $matricula;
 	public $senha;
 	public $email;
@@ -21,4 +23,64 @@ class Usuario{
 	    }
 
 	}
+
+	public function buscarTodos(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM usuarios";
+        $stmt = $conexao->query($query);
+        return $stmt->fetchAll();
+	}
+
+	public function apagar() {
+		$conexao = Conexao::pegarConexao();
+		$query = "DELETE FROM usuarios WHERE id=:id";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":id", $this->id);
+		try{
+			$stmt->execute();
+			$_SESSION["green"] = "Usuario apagado com sucesso";
+		}catch(\Throwable $e){
+			$_SESSION["red"] = "Erro ao apagar usuario .<br><br>[$e]";
+		}
+	}
+
+	public function inserir(){
+		$conexao = Conexao::pegarConexao();
+		$query = "INSERT INTO usuarios(matricula, nome, email, perfil, senha) 
+					VALUES (:matricula, :nome, :email, :perfil, md5(:senha))";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":matricula", $this->matricula);
+		$stmt->bindValue(":nome", $this->nome);
+		$stmt->bindValue(":email", $this->email);
+		$stmt->bindValue(":perfil", $this->perfil);
+		$stmt->bindValue(":senha", $this->senha);
+		try{
+			$stmt->execute();
+			$_SESSION["green"] = 'Usuario inserido com sucesso';
+		}catch(\Throwable $e){
+			$_SESSION["red"] = "Erro ao inserir usuario. <br><br>[$e]";
+		}
+	}
+	
+	public function atualizar(){
+		$conexao = Conexao::pegarConexao();
+		$query = "UPDATE usuarios SET matricula=:matricula, nome=:nome, email=:email, 
+				  perfil=:perfil, senha=:senha WHERE id=:id";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":matricula", $this->matricula);
+		$stmt->bindValue(":nome", $this->nome);
+		$stmt->bindValue(":email", $this->email);
+		$stmt->bindValue(":perfil", $this->perfil);
+		$stmt->bindValue(":senha", $this->senha);
+		$stmt->bindValue(":id", $this->id);
+
+		try{
+			$stmt->execute();
+			$_SESSION["green"] = "Usuario alterado com sucsso";
+		}catch(\Throwable $e){
+			$_SESSION["red"] = "Error ao alterar usuario. <br><br>[$e]";
+		}
+	}
+
+
 }
