@@ -78,12 +78,12 @@ mostrarNotificacao('green');
         <td>
 
           <div class="ui small basic icon buttons">
-            <button class="ui button"><i class="comment icon"></i></button>
-            <button class="ui button" onclick="editar('<?= $usuario['id'] ?>', '<?= $usuario['matricula'] ?>', 
+            <button class="ui button" data-tooltip="Chamado do usuario"><i class="comment icon"></i></button>
+            <button class="ui button"data-tooltip="Editar" onclick="editar('<?= $usuario['id'] ?>', '<?= $usuario['matricula'] ?>', 
                 '<?= $usuario['nome'] ?>', '<?= $usuario['email'] ?>', '<?= $usuario['perfil'] ?>', '<?= $usuario['senha'] ?>')">
               <i class="pencil icon"></i>
             </button>
-            <button class="ui red button" onclick="excluir(<?= $usuario['id'] ?>)"> <i class="trash icon"></i></button>
+            <button class="ui red button" data-tooltip="Excluir" onclick="excluir(<?= $usuario['id'] ?>)"> <i class="trash icon"></i></button>
           </div>
         </td>
       </tr>
