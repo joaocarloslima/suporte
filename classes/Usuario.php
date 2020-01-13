@@ -21,6 +21,7 @@ class Usuario{
 	    	$this->perfil = $linha["perfil"];
 	    	$this->email = $linha["email"];
 	    	$this->nome = $linha["nome"];
+	    	$this->id = $linha["id"];
 	    }
 
 	}
