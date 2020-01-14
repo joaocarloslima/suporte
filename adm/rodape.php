@@ -1,7 +1,4 @@
-<script
-src="https://code.jquery.com/jquery-3.3.1.min.js"
-integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <script src="../semanticui/semantic.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
@@ -9,8 +6,7 @@ crossorigin="anonymous"></script>
 
 
 <script type="text/javascript">
-
-	$(document).ready( function () {
+	$(document).ready(function() {
 		$('#datatable').DataTable({
 			"pagingType": "numbers",
 			"dom": '<"toolbar">frtip',
@@ -31,8 +27,6 @@ crossorigin="anonymous"></script>
 			}
 		});
 		$('#datatable_filter').children('label').addClass("ui input");
-	} );
 
-
-
+	});
 </script>

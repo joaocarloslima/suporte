@@ -25,4 +25,26 @@ class view{
         return $html;
     }
 
+    public static function mostrarTempoDeAtendimento($dataAbertura, $dataFechamento){
+        $abertura = new DateTime($dataAbertura);
+        $fechamento = new DateTime($dataFechamento);
+        $diferenca = $abertura->diff($fechamento);
+        $html = "";
+        $partes = array();
+        if ($diferenca->y > 1) array_push($partes, $diferenca->y . " anos");
+        elseif ($diferenca->y > 0) array_push($partes, $diferenca->y . " ano");
+        if ($diferenca->m > 1) array_push($partes, $diferenca->m . " meses");
+        elseif ($diferenca->m > 0) array_push($partes, $diferenca->m . " mês");
+        if ($diferenca->d > 1) array_push($partes, $diferenca->d . " dias");
+        elseif ($diferenca->d > 0) array_push($partes, $diferenca->d . " dia");
+        if ($diferenca->h > 1) array_push($partes, $diferenca->h . " horas");
+        elseif ($diferenca->h > 0) array_push($partes, $diferenca->h . " hora");
+        if ($diferenca->i > 1) array_push($partes, $diferenca->i . " minutos");
+        elseif ($diferenca->i > 0) array_push($partes, $diferenca->i . " minuto");
+
+        $html.= join(", ", $partes);
+        return $html;
+
+    }
+
 }
