@@ -1,5 +1,14 @@
+<?php
+require_once "global.php";
+session_start();
+$usuario_logado = unserialize($_SESSION["usuario"]);
+$chamado = new Chamado();
+$chamados = $chamado->buscarChamadosFechadosPorUsuario($usuario_logado->id);
+?>
+
 <table class="ui red celled padded table" id="datatable">
   <thead>
+    <tr>
     <th>#</th>
     <th>Problema</th>
     <th>Local</th>
@@ -7,43 +16,21 @@
     <th>Solução</th>
     <th>Tempo de Atendimento</th>
     <th>Avaliar</th>
-  </tr></thead>
+    </tr>
+  </thead>
   <tbody>
-    <tr>
-      <td>5</td>
-      <td class="single line">Mouse com defeito</td>
-      <td>Lab 6</td>
-      <td>M12</td>
-      <td>Mouse trocado</td>
-      <td>2 dias e 14 horas</td>
-      <td><div class="ui star rating" data-rating="2"></div></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td class="single line">Monitor sem imagem</td>
-      <td>Coordenação</td>
-      <td>Alvaro</td>
-      <td>Cabo de vídeo trocado</td>
-      <td>3 horas</td>
-      <td><div class="ui star rating" data-rating="3"></div></td>
-    </tr>
-
+    <?php foreach ($chamados as $chamado) : ?>
+      <tr>
+        <td><?= $chamado["id"] ?></td>
+        <td class="single line"><?= $chamado["problema"] ?></td>
+        <td><?= $chamado["local"] . " (" . $chamado['localSigla'] . ")" ?></td>
+        <td><?= $chamado["equipamento"] . " (" . $chamado['equipamentoSigla'] . ")" ?></td>
+        <td><?= $chamado["solucao"] ?></td>
+        <td>2 dias e 14 horas</td>
+        <td>
+          <div class="ui star rating" data-rating="<?= $chamado["avaliacao"] ?>"></div>
+        </td>
+      </tr>
+    <?php endforeach ?>
   </tbody>
-  <tfoot>
-    <tr><th colspan="7">
-      <div class="ui right floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
-    </th>
-  </tr></tfoot>
 </table>
-
