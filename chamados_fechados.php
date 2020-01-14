@@ -26,7 +26,7 @@ $chamados = $chamado->buscarChamadosFechadosPorUsuario($usuario_logado->id);
         <td><?= $chamado["local"] . " (" . $chamado['localSigla'] . ")" ?></td>
         <td><?= $chamado["equipamento"] . " (" . $chamado['equipamentoSigla'] . ")" ?></td>
         <td><?= $chamado["solucao"] ?></td>
-        <td>2 dias e 14 horas</td>
+        <td><?= view::mostrarTempoDeAtendimento($chamado["dataAbertura"], $chamado["dataFechamento"])?></td>
         <td>
           <div class="ui star rating" data-rating="<?= $chamado["avaliacao"] ?>"></div>
         </td>

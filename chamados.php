@@ -18,6 +18,7 @@
 
 <script>
   $('.ui.rating').rating();
+  $('.dropdown').dropdown();
 </script>
 
 </html>
