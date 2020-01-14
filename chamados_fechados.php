@@ -8,6 +8,7 @@ $chamados = $chamado->buscarChamadosFechadosPorUsuario($usuario_logado->id);
 
 <table class="ui red celled padded table" id="datatable">
   <thead>
+    <tr>
     <th>#</th>
     <th>Problema</th>
     <th>Local</th>

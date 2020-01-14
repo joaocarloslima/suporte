@@ -74,7 +74,7 @@ mostrarNotificacao('green');
                 <td><?= $equipamento["local"] ?></td>
                 <td>
                     <div class="ui small basic icon buttons">
-                        <button class="ui button" data-tooltip="ver chamados do equipamento"><i class="comment icon"></i></button>
+                        <a href="chamado_por_equipamento.php?idEquipamento=<?= $equipamento["id"]?>&sigla=<?=$equipamento["sigla"]?> "><button class="ui button" data-tooltip="ver chamados do equipamento" onclick="chamadosEquipamento('<?=$equipamento["id"] ?>')"><i class="comment icon"></i></button></a>
                         <button class="ui button" data-tooltip="editar" onclick="editar('<?= $equipamento["id"] ?>', '<?= $equipamento["descricao"] ?>', '<?= $equipamento["sigla"] ?>', '<?= $equipamento["patrimonio"]?>', '<?= $equipamento["tipo"]?>', '<?= $equipamento["idlocal"] ?>' )"><i class="pencil icon"></i></button>
                         <button class="ui button" data-tooltip="apagar" onclick="excluir(<?= $equipamento["id"] ?>)"><i class="trash icon"></i></button>
                     </div>
@@ -175,6 +175,7 @@ mostrarNotificacao('green');
 
 
 <?php include "rodape.php" ?>
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script type="text/javascript">

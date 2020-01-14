@@ -64,4 +64,5 @@ class Equipamento{
 			$_SESSION["red"] = "Erro ao alterar equipamento. <br><br>[$e]";
 		}
 	}
+
 }
