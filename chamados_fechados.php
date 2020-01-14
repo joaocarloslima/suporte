@@ -25,7 +25,7 @@
       <td>Alvaro</td>
       <td>Cabo de vídeo trocado</td>
       <td>3 horas</td>
-      <td><div class="ui star rating" data-rating="4"></div></td>
+      <td><div class="ui star rating" data-rating="3"></div></td>
     </tr>
 
   </tbody>
