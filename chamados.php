@@ -16,4 +16,8 @@
 
 <?php include "rodape.php" ?>
 
+<script>
+  $('.ui.rating').rating();
+</script>
+
 </html>

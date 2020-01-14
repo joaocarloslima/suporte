@@ -30,6 +30,21 @@ class Chamado{
 		return $stmt->fetchAll();
 	}
 
+	public function buscarChamadosFechadosPorUsuario($idUsuario){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT chamados.*, 
+					DATE_FORMAT(chamados.dataAbertura, '%d/%m/%Y %h:%i') as abertura, 
+					locais.nome as local, locais.sigla as localSigla, equipamentos.descricao as equipamento, equipamentos.sigla as equipamentoSigla 
+					FROM chamados
+					INNER JOIN locais on locais.id=chamados.idLocal
+					INNER JOIN equipamentos on equipamentos.id=chamados.idEquipamento
+					WHERE idUsuario=:idUsuario AND dataFechamento IS NOT NULL";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":idUsuario", $idUsuario);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+
 	public function apagar() {
 		$conexao = Conexao::pegarConexao();
 		$query = "DELETE FROM equipamentos WHERE id=:id";

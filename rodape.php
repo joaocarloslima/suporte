@@ -8,7 +8,6 @@
 
 
 <script type="text/javascript">
-  $('.ui.rating').rating();
 
   $(document).ready( function () {
 		$('#datatable').DataTable({
