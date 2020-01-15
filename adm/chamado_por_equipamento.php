@@ -11,7 +11,7 @@ $NomeEquipamento = $_GET["sigla"];
 <?php include "cabecalho.php"; ?>
 <table class="ui blue celled padded table" id="datatable">
     <p>
-        <h3>Chamados do <?= $NomeEquipamento ?></h3>
+        <h3>Chamados - <?= $NomeEquipamento ?></h3>
     </p>
     <thead>
         <th>Cod. Chamado</th>
@@ -29,7 +29,7 @@ $NomeEquipamento = $_GET["sigla"];
                 <td><?= $chamadaEquipamento['id'] ?></td>
                 <td class="single line"><?= $chamadaEquipamento["problema"] ?></td>
 
-                <td><?= $chamadaEquipamento["local"] ?></td>
+                <td><?= $chamadaEquipamento["local"] . "(" . $chamadaEquipamento["localSigla"] . ")"?></td>
 
                 <td><?= $chamadaEquipamento["solucao"] ?></td>
 
@@ -37,7 +37,7 @@ $NomeEquipamento = $_GET["sigla"];
 
                 <td><?= $chamadaEquipamento["dataFechamento"] != null ? "Fechado" : "Aberto" ?></td>
                 <td>
-                    <div class="ui star rating" data-rating="<?= $chamadaEquipamento["avaliacao"]?>"></div>
+                    <div class="ui star rating" data-rating="<?= $chamadaEquipamento["avaliacao"] > 4?"4":$chamadaEquipamento["avaliacao"] ?>"></div>
                 </td>
             </tr>
         <?php endforeach ?>
