@@ -63,14 +63,13 @@ class Chamado{
 		$query = "INSERT INTO 
 					chamados(problema, idLocal, idEquipamento, idUsuario, dataAbertura)
 				VALUES 
-					(:problema, :idLocal, :idEquipamento, :idUsuario, :dataAbertura)";
+					(:problema, :idLocal, :idEquipamento, :idUsuario, NOW())";
 
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(":problema", $this->problema);
 		$stmt->bindValue(":idLocal", $this->idLocal);
 		$stmt->bindValue(":idEquipamento", $this->idEquipamento);
 		$stmt->bindValue(":idUsuario", $this->idUsuario);
-		$stmt->bindValue(":dataAbertura", date('Y-m-d H:i:s'));
 		try {
 			$stmt->execute();
 			$_SESSION["green"] = "Chamado aberto com sucesso";
@@ -121,17 +120,32 @@ class Chamado{
 		return $stmt->fetchAll();
 	}
 
+	public static function qtdeChamadosAbertos(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM chamados WHERE dataFechamento IS NULL";
+		$stmt = $conexao->query($query);
+		return $stmt->rowCount();
+	}
 
+	public static function tempoMedioDeEspera(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT SEC_TO_TIME(AVG(TIME_TO_SEC(timediff(dataAbertura, dataFechamento)))) as media FROM `chamados` WHERE dataFechamento is not null";
+		$stmt = $conexao->query($query);
+		return $stmt->fetchColumn(0);
+	}
 
+	public static function chamadoMaisAntigo(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT TIMEDIFF(MIN(dataAbertura),NOW()) FROM chamados WHERE dataFechamento IS NULL";
+		$stmt = $conexao->query($query);
+		return $stmt->fetchColumn(0);
+	}
 
+	public static function satisfacaoMedia(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT AVG(avaliacao) as media FROM `chamados` WHERE avaliacao IS NOT NULL AND dataFechamento IS NOT NULL";
+		$stmt = $conexao->query($query);
+		return $stmt->fetchColumn(0);
+	}
 
-	// public function calculaMediaTempo($id){
-	// 	$conexao = Conexao::pegarConexao();
-	// 	$query = "SELECT TIMEDIFF(dataAbertura, dataFechamento) as media FROM chamados 
-	// 			  WHERE idEquipamento=:id";
-	// 	$stmt = $conexao->prepare($query);
-	// 	$stmt->bindValue(":id", $id);
-	// 	$stmt->execute();
-	// 	return $stmt->fetchAll();
-	// }
 }
