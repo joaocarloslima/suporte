@@ -60,21 +60,26 @@ class Chamado{
 
 	public function inserir() {
 		$conexao = Conexao::pegarConexao();
-		$query = "INSERT INTO equipamentos (id, descricao, sigla, patrimonio, tipo, idlocal) VALUES (0, :descricao, :sigla, :patrimonio, :tipo, :idlocal)";
+		$query = "INSERT INTO 
+					chamados(problema, idLocal, idEquipamento, idUsuario, dataAbertura)
+				VALUES 
+					(:problema, :idLocal, :idEquipamento, :idUsuario, :dataAbertura)";
+
 		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(":descricao", $this->descricao);
-		$stmt->bindValue(":sigla", $this->sigla);
-		$stmt->bindValue(":patrimonio", $this->patrimonio);
-		$stmt->bindValue(":tipo", $this->tipo);
-		$stmt->bindValue(":idlocal", $this->idlocal);
+		$stmt->bindValue(":problema", $this->problema);
+		$stmt->bindValue(":idLocal", $this->idLocal);
+		$stmt->bindValue(":idEquipamento", $this->idEquipamento);
+		$stmt->bindValue(":idUsuario", $this->idUsuario);
+		$stmt->bindValue(":dataAbertura", date('Y-m-d H:i:s'));
 		try {
 			$stmt->execute();
-			$_SESSION["green"] = "Equipamento cadastrado com sucesso";
+			$_SESSION["green"] = "Chamado aberto com sucesso";
 		} catch (\Throwable $e) {
-			$_SESSION["red"] = "Erro ao cadastrar equipamento. <br><br>[$e]";
+			$_SESSION["red"] = "Erro ao abrir chamado. <br><br>[$e]";
 		}
 	}
 
+	// Mudar para o ADM 
 	public function atualizar() {
 		$conexao = Conexao::pegarConexao();
 		$query = "UPDATE equipamentos SET descricao=:descricao, sigla=:sigla, patrimonio=:patrimonio, tipo=:tipo, idlocal=:idlocal WHERE id=:id";
@@ -116,13 +121,17 @@ class Chamado{
 		return $stmt->fetchAll();
 	}
 
-	public function calculaMediaTempo($id){
-		$conexao = Conexao::pegarConexao();
-		$query = "SELECT TIMEDIFF(dataAbertura, dataFechamento) as media FROM chamados 
-				  WHERE idEquipamento=:id";
-		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(":id", $id);
-		$stmt->execute();
-		return $stmt->fetchAll();
-	}
+
+
+
+
+	// public function calculaMediaTempo($id){
+	// 	$conexao = Conexao::pegarConexao();
+	// 	$query = "SELECT TIMEDIFF(dataAbertura, dataFechamento) as media FROM chamados 
+	// 			  WHERE idEquipamento=:id";
+	// 	$stmt = $conexao->prepare($query);
+	// 	$stmt->bindValue(":id", $id);
+	// 	$stmt->execute();
+	// 	return $stmt->fetchAll();
+	// }
 }
