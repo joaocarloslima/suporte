@@ -45,6 +45,75 @@ class Chamado{
 		return $stmt->fetchAll();
 	}
 
+	public function buscarChamadosPorEquipamento($id){
+		$conexao = Conexao::pegarConexao();
+	
+		$query = 
+		"SELECT chamados.*, 
+			TIMEDIFF(dataAbertura, dataFechamento) as media, 
+			locais.nome as local, locais.sigla as localSigla, 
+			equipamentos.descricao as equipamento, equipamentos.sigla as equipamentoSigla 
+			FROM 
+				chamados
+			INNER JOIN 
+				locais on locais.id=chamados.idLocal
+			INNER JOIN 
+				equipamentos on equipamentos.id=chamados.idEquipamento
+			WHERE 
+				idEquipamento=:id";
+	
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":id", $id);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+
+	public function buscarTodosChamadosAbertos(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT chamados.*, 
+					DATE_FORMAT(chamados.dataAbertura, '%d/%m/%Y %h:%i') as abertura, 
+						locais.nome as local, locais.sigla as localSigla, 
+						equipamentos.descricao as equipamento, equipamentos.sigla as equipamentoSigla,
+						usuarios.nome as usuario, usuarios.matricula as usuarioMatricula 
+					FROM 
+						chamados
+					INNER JOIN 
+						locais on locais.id=chamados.idLocal
+					INNER JOIN 
+						equipamentos on equipamentos.id=chamados.idEquipamento
+					INNER JOIN
+						usuarios on usuarios.id=chamados.idUsuario
+					WHERE 
+						dataFechamento IS NULL";
+
+		$stmt = $conexao->prepare($query);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+
+	public function buscarTodosChamadosFechados(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT chamados.*, 
+					DATE_FORMAT(chamados.dataAbertura, '%d/%m/%Y %h:%i') as abertura, 
+						locais.nome as local, locais.sigla as localSigla, 
+						equipamentos.descricao as equipamento, equipamentos.sigla as equipamentoSigla,
+						usuarios.nome as usuario, usuarios.matricula as usuarioMatricula 
+					FROM 
+						chamados
+					INNER JOIN 
+						locais on locais.id=chamados.idLocal
+					INNER JOIN 
+						equipamentos on equipamentos.id=chamados.idEquipamento
+					INNER JOIN
+						usuarios on usuarios.id=chamados.idUsuario
+					WHERE 
+						dataFechamento IS NOT NULL";
+
+		$stmt = $conexao->prepare($query);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+
 	public function apagar() {
 		$conexao = Conexao::pegarConexao();
 		$query = "DELETE FROM equipamentos WHERE id=:id";
@@ -97,41 +166,4 @@ class Chamado{
 			$_SESSION["red"] = "Erro ao alterar equipamento. <br><br>[$e]";
 		}
 	}
-
-	public function buscarChamadosPorEquipamento($id){
-		$conexao = Conexao::pegarConexao();
-
-		$query = 
-		"SELECT chamados.*, 
-			TIMEDIFF(dataAbertura, dataFechamento) as media, 
-			locais.nome as local, locais.sigla as localSigla, 
-			equipamentos.descricao as equipamento, equipamentos.sigla as equipamentoSigla 
-			FROM 
-				chamados
-			INNER JOIN 
-				locais on locais.id=chamados.idLocal
-			INNER JOIN 
-				equipamentos on equipamentos.id=chamados.idEquipamento
-			WHERE 
-				idEquipamento=:id";
-
-		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(":id", $id);
-		$stmt->execute();
-		return $stmt->fetchAll();
-	}
-
-
-
-
-
-	// public function calculaMediaTempo($id){
-	// 	$conexao = Conexao::pegarConexao();
-	// 	$query = "SELECT TIMEDIFF(dataAbertura, dataFechamento) as media FROM chamados 
-	// 			  WHERE idEquipamento=:id";
-	// 	$stmt = $conexao->prepare($query);
-	// 	$stmt->bindValue(":id", $id);
-	// 	$stmt->execute();
-	// 	return $stmt->fetchAll();
-	// }
 }

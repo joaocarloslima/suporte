@@ -1,42 +1,38 @@
+<?php
+require_once "../global.php";
+session_start();
+$chamado = new Chamado();
+$chamados = $chamado->buscarTodosChamadosFechados();
+?>
+
 <table class="ui red celled padded table" id="datatable">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Problema</th>
-      <th>Usuário</th>
-      <th>Local</th>
-      <th>Equipamento</th>
-      <th>Solução</th>
-      <th>Tempo de Atendimento</th>
-      <th>Avaliação</th>
+    <th>#</th>
+    <th>Problema</th>
+    <th>Usuario</th>
+    <th>Local</th>
+    <th>Equipamento</th>
+    <th>Solução</th>
+    <th>Tempo de Atendimento</th>
+    <th>Avaliar</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>5</td>
-      <td class="single line">Mouse com defeito</td>
-      <td>Alvaro</td>
-      <td>Lab 6</td>
-      <td>M12</td>
-      <td>Mouse trocado</td>
-      <td>2 dias e 14 horas</td>
-      <td><i class="star yellow icon"></i></td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>Ana</td>
-      <td class="single line">Monitor sem imagem</td>
-      <td>Coordenação</td>
-      <td>Alvaro</td>
-      <td>Cabo de vídeo trocado</td>
-      <td>3 horas</td>
-      <td>
-        <i class="star yellow icon"></i>
-        <i class="star yellow icon"></i>
-        <i class="star yellow icon"></i>
-      </td>
-    </tr>
+    <?php foreach ($chamados as $chamado) : ?>
+      <tr>
+        <td><?= $chamado["id"] ?></td>
+        <td class="single line"><?= $chamado["problema"] ?></td>
+        <td class="single line"><?= $chamado["usuario"] . " - " . $chamado["usuarioMatricula"]?></td>
+        <td><?= $chamado["local"] . " (" . $chamado['localSigla'] . ")" ?></td>
+        <td><?= $chamado["equipamento"] . " (" . $chamado['equipamentoSigla'] . ")" ?></td>
+        <td><?= $chamado["solucao"] ?></td>
+        <td><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], $chamado["dataFechamento"])?></td>
+        <td>
+        <div class="ui star rating" data-rating="<?= $chamado["avaliacao"] > 4?"4":$chamadaEquipamento["avaliacao"] ?>"></div>
 
+        </td>
+      </tr>
+    <?php endforeach ?>
   </tbody>
 </table>
-
