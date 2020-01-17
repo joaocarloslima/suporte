@@ -166,30 +166,6 @@ class Chamado{
 		}
 	}
 
-
-	public function buscarChamadosPorEquipamento($id){
-		$conexao = Conexao::pegarConexao();
-
-		$query = 
-		"SELECT chamados.*, 
-			TIMEDIFF(dataAbertura, dataFechamento) as media, 
-			locais.nome as local, locais.sigla as localSigla, 
-			equipamentos.descricao as equipamento, equipamentos.sigla as equipamentoSigla 
-			FROM 
-				chamados
-			INNER JOIN 
-				locais on locais.id=chamados.idLocal
-			INNER JOIN 
-				equipamentos on equipamentos.id=chamados.idEquipamento
-			WHERE 
-				idEquipamento=:id";
-
-		$stmt = $conexao->prepare($query);
-		$stmt->bindValue(":id", $id);
-		$stmt->execute();
-		return $stmt->fetchAll();
-	}
-
 	public static function qtdeChamadosAbertos(){
 		$conexao = Conexao::pegarConexao();
 		$query = "SELECT * FROM chamados WHERE dataFechamento IS NULL";
