@@ -47,4 +47,24 @@ class view{
 
     }
 
+    public static function mostrarEmHoras($tempo){
+        $arrayTempo = explode(":", $tempo);
+        $horas = abs($arrayTempo[0]);
+        $html = $horas."h";
+        return $html;
+    }
+
+    public static function mostrarEstrelas($avaliacao){
+        $avaliacao = round($avaliacao);
+        $html = "<div class='value'>";
+        $i = 0;
+        for(;$i<$avaliacao;$i++) $html .= "<i class='star icon'></i>";
+        for($j=0;$j<(4-$i);$j++) $html .= "<i class='star outline icon'></i>";
+        
+        $html .= "</div>";
+
+        return $html;
+    }
+        
+
 }
