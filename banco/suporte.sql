@@ -34,11 +34,11 @@ CREATE TABLE `chamados` (
   `idLocal` int(11) NOT NULL,
   `idEquipamento` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `solucao` varchar(200) NOT NULL,
-  `avaliacao` int(11) NOT NULL,
+  `solucao` varchar(200) NULL,
+  `avaliacao` int(11) NULL,
   `dataAbertura` datetime NOT NULL,
-  `dataFechamento` datetime NOT NULL,
-  `prioridade` int(11) NOT NULL
+  `dataFechamento` datetime NULL,
+  `prioridade` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
