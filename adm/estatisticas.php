@@ -1,5 +1,5 @@
 <?php
-include "../global.php";
+require_once "../global.php";
 $qtdeChamadosAbertos = Chamado::qtdeChamadosAbertos();
 $tempoMedio = Chamado::tempoMedioDeEspera();
 $chamadoMaisAntigo = Chamado::chamadoMaisAntigo();
