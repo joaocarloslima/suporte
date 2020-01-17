@@ -24,9 +24,9 @@ $listaChamados = $chamado->buscarTodosChamadosAbertos();
           </div>
           <div class="extra content">
             <span class="right floated">
-            <td><?= View::mostrarPrioridade($chamado["prioridade"]) ?></td>  
+            <td><?= View::mostrarPrioridade($chamado["prioridade"], $chamado["id"] ) ?></td>  
             </span>
-            <i class="clock outline icon"></i><?= View::mostrarTempoDeAtendimento($chamado["abertura"], date('d-m-Y H:i'))?>
+            <i class="clock outline icon"></i><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], date('Y-m-d H:i:s'))?>
           </div>
           <div class="extra content">
             <div class="ui large transparent left icon input">
@@ -38,3 +38,4 @@ $listaChamados = $chamado->buscarTodosChamadosAbertos();
     </form>
   </div>
 </div>
+
