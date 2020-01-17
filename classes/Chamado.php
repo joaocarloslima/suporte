@@ -132,14 +132,13 @@ class Chamado{
 		$query = "INSERT INTO 
 					chamados(problema, idLocal, idEquipamento, idUsuario, dataAbertura)
 				VALUES 
-					(:problema, :idLocal, :idEquipamento, :idUsuario, :dataAbertura)";
+					(:problema, :idLocal, :idEquipamento, :idUsuario, NOW())";
 
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(":problema", $this->problema);
 		$stmt->bindValue(":idLocal", $this->idLocal);
 		$stmt->bindValue(":idEquipamento", $this->idEquipamento);
 		$stmt->bindValue(":idUsuario", $this->idUsuario);
-		$stmt->bindValue(":dataAbertura", date('Y-m-d H:i:s'));
 		try {
 			$stmt->execute();
 			$_SESSION["green"] = "Chamado aberto com sucesso";
