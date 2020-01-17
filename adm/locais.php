@@ -58,7 +58,7 @@ mostrarNotificacao('green');
                 <td><?= $local["sigla"] ?></td>
                 <td>
                     <div class="ui small basic icon buttons">
-                        <button class="ui button" data-tooltip="ver equipamentos do local"><i class="desktop icon"></i></button>
+                        <a href="equipamentos_por_local.php?idLocal=<?= $local["id"]?>&local=<?=$local["nome"]?>"><button class= "ui button" data-tooltip="ver equipamentos do local"><i class="desktop icon"></i></button></a>
                         <button class="ui button" data-tooltip="editar" onclick="editar('<?= $local["id"] ?>', '<?= $local["nome"] ?>', '<?= $local["sigla"]?>')"><i class="pencil icon"></i></button>
                         <button class="ui button" data-tooltip="apagar" onclick="excluir(<?= $local["id"] ?>)"><i class="trash icon"></i></button>
                     </div>
