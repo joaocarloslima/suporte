@@ -12,12 +12,13 @@ if(isset($_POST["acao"])){
     }
 
     if($_POST["acao"] == "responder_chamados"){
+        session_start();
         $chamado = new Chamado();
         $chamado->id = $_POST["id"];
         $chamado->carregar();
         $chamado->solucao = $_POST["solucao"];
+        $chamado->dataFechamento = date("Y-m-d H:i:s");
         $chamado->atualizar();
-        $_SESSION["success"] = "Chamado respondido";
     }
 }
 

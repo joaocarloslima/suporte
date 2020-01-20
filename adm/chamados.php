@@ -76,7 +76,8 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 				solucao: respostaChamado
 			},
 			success: function(){
-				
+				botao.next().hide()
+				botao.hide();
 			}
 		});
 	}
