@@ -61,6 +61,26 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 		});
 	}
 
+	$('.botao-respoderChamado').click(enviarResposta);
+
+	function enviarResposta(){
+		const botao = $(this);
+		const id_chamado = (botao.data('id'));
+		const respostaChamado = botao.next().val();	
+		$.ajax({
+			url: "../api/api_chamado.php",
+			method: "POST",
+			data: {
+				acao: "responder_chamados",
+				id: id_chamado,
+				solucao: respostaChamado
+			},
+			success: function(){
+				
+			}
+		});
+	}
+
 	$('.ui.rating').rating();
 	$('.dropdown').dropdown();
 </script>

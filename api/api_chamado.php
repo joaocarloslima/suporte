@@ -10,7 +10,17 @@ if(isset($_POST["acao"])){
         $chamado->atualizar();
         echo View::mostrarPrioridade($chamado->prioridade, $chamado->id);
     }
+
+    if($_POST["acao"] == "responder_chamados"){
+        $chamado = new Chamado();
+        $chamado->id = $_POST["id"];
+        $chamado->carregar();
+        $chamado->solucao = $_POST["solucao"];
+        $chamado->atualizar();
+        $_SESSION["success"] = "Chamado respondido";
+    }
 }
+
 
 
 ?>

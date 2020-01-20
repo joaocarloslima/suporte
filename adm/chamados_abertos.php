@@ -30,11 +30,13 @@ $tempoMedio = Chamado::tempoMedioDeEspera();
         </div>
         <div class="extra content">
           <div class="ui large transparent left icon input">
-            <i class="check icon"></i>
-            <input type="text" placeholder="responder chamado">
+            <button data-id="<?= $chamado["id"]?>" class="botao-respoderChamado ui primari basic button">
+              <i class="check icon"></i>
+            </button>
+            <input name="input-resposta" type="text" id="responder-chamado" placeholder="responder chamado" />
           </div>
         </div>
       </div>
-<?php endforeach ?>
-</div>
+    <?php endforeach ?>
+  </div>
 </div>
