@@ -66,6 +66,11 @@ class view{
 
         return $html;
     }
-        
+    
+    public static function tempoDeEspera($dataAbertura){
+        $horaAtual = date('Y-m-d H:i');
+        $tempoEspera = $dataAbertura - $horaAtual;
+        return $tempoEspera;
+    }
 
 }

@@ -3,13 +3,14 @@ require_once "../global.php";
 
 $chamado = new Chamado();
 $listaChamados = $chamado->buscarTodosChamadosAbertos();
+$tempoMedio = Chamado::tempoMedioDeEspera();
+
 
 ?>
 
 <div class="ui four doubling cards">
   <div class="ui cards">
-    <form action="chamados.php" method="POST">
-      <?php foreach ($listaChamados as $chamado) : ?>
+    <?php foreach ($listaChamados as $chamado) : ?>
       <?php $arquivo = "../fotos/" . (string) $usuario['matricula'] . ".jpg"; ?>
         <div class="card blue">
           <div class="content">
@@ -26,16 +27,17 @@ $listaChamados = $chamado->buscarTodosChamadosAbertos();
             <span class="right floated">
             <td><?= View::mostrarPrioridade($chamado["prioridade"], $chamado["id"] ) ?></td>  
             </span>
-            <i class="clock outline icon"></i><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], date('Y-m-d H:i:s'))?>
+          <i class="clock outline icon"></i><?= View::tempoDeEspera($chamado["dataAbertura"])?>
           </div>
-          <div class="extra content">
-            <div class="ui large transparent left icon input">
-              <i class="check icon"></i>
-              <input type="text" placeholder="responder chamado">
-            </div>
+        </div>
+        <div class="extra content">
+          <div class="ui large transparent left icon input">
+            <i class="check icon"></i>
+            <input type="text" placeholder="responder chamado">
           </div>
-        <?php endforeach ?>
-    </form>
+        </div>
+      </div>
+    <?php endforeach ?>
   </div>
 </div>
 

@@ -65,4 +65,13 @@ class Equipamento{
 		}
 	}
 
+	public function buscarEquipamentosPorLocal($idLocal){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM equipamentos WHERE idLocal=:idLocal";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":idLocal", $idLocal);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+
 }
