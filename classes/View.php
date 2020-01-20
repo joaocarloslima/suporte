@@ -1,13 +1,14 @@
 <?php
 class view{
 
-    public static function mostrarPrioridade($prioridade){
+    public static function mostrarPrioridade($prioridade, $id=0){
         $PRIORIDADES = array("Alta", "Média", "Baixa");
         $ICONES = array("full red", "half yellow", "empty green");
         $icone = $ICONES[$prioridade];
-        $html = "";
+        $html = "<span class='botao-prioridade' data-id=$id>";
         $html.= "<i class='icon thermometer $icone'></i>";
         $html.= $PRIORIDADES[$prioridade];
+        $html.= "</span>";
         return $html;
     }
 

@@ -150,20 +150,48 @@ class Chamado{
 	// Mudar para o ADM 
 	public function atualizar() {
 		$conexao = Conexao::pegarConexao();
-		$query = "UPDATE equipamentos SET descricao=:descricao, sigla=:sigla, patrimonio=:patrimonio, tipo=:tipo, idlocal=:idlocal WHERE id=:id";
+		$query = "UPDATE chamados SET 
+			problema=:problema,
+			idLocal = :idLocal,
+			idEquipamento = :idEquipamento,
+			idUsuario = :idUsuario,
+			solucao = :solucao,
+			avaliacao = :avaliacao,
+			dataAbertura = :dataAbertura,
+			dataFechamento = :dataFechamento,
+			prioridade = :prioridade
+			 WHERE id=:id";
 		$stmt = $conexao->prepare($query);
 		$stmt->bindValue(":id", $this->id);
-		$stmt->bindValue(":descricao", $this->descricao);
-		$stmt->bindValue(":sigla", $this->sigla);
-		$stmt->bindValue(":patrimonio", $this->patrimonio);
-		$stmt->bindValue(":tipo", $this->tipo);
-		$stmt->bindValue(":idlocal", $this->idlocal);
-		try {
-			$stmt->execute();
-			$_SESSION["green"] = "Equipamento alterado com sucesso";
-		} catch (\Throwable $e) {
-			$_SESSION["red"] = "Erro ao alterar equipamento. <br><br>[$e]";
-		}
+		$stmt->bindValue(":problema", $this->problema);
+		$stmt->bindValue(":idLocal", $this->idLocal);
+		$stmt->bindValue(":idEquipamento", $this->idEquipamento);
+		$stmt->bindValue(":idUsuario", $this->idUsuario);
+		$stmt->bindValue(":solucao", $this->solucao);
+		$stmt->bindValue(":avaliacao", $this->avaliacao);
+		$stmt->bindValue(":dataAbertura", $this->dataAbertura);
+		$stmt->bindValue(":dataFechamento", $this->dataFechamento);
+		$stmt->bindValue(":prioridade", $this->prioridade);
+		$stmt->execute();
+	}
+
+	public function carregar(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM chamados WHERE id=:id";
+	    $stmt = $conexao->prepare($query);
+	    $stmt->bindValue(":id", $this->id);
+	    $stmt->execute();
+	    if ($linha = $stmt->fetch()) {
+	    	$this->problema = $linha["problema"];
+	    	$this->idLocal = $linha["idLocal"];
+	    	$this->idEquipamento = $linha["idEquipamento"];
+	    	$this->idUsuario = $linha["idUsuario"];
+	    	$this->solucao = $linha["solucao"];
+	    	$this->avaliacao = $linha["avaliacao"];
+	    	$this->dataAbertura = $linha["dataAbertura"];
+	    	$this->dataFechamento = $linha["dataFechamento"];
+	    	$this->prioridade = $linha["prioridade"];
+	    }
 	}
 
 	public static function qtdeChamadosAbertos(){

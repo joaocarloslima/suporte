@@ -9,7 +9,8 @@
 
 <script type="text/javascript">
 
-  $(document).ready( function () {
+
+$(document).ready( function () {
 		$('#datatable').DataTable({
 			"pagingType": "numbers",
 			"dom": '<"toolbar">frtip',
@@ -31,6 +32,8 @@
 		});
 		$('#datatable_filter').children('label').addClass("ui input");
 	} );
+
+
 
 
 </script>
