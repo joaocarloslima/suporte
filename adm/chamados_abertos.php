@@ -5,6 +5,8 @@ $chamado = new Chamado();
 $listaChamados = $chamado->buscarTodosChamadosAbertos();
 $tempoMedio = Chamado::tempoMedioDeEspera();
 
+$COR = array("red", "yellow", "green");
+
 
 ?>
 
@@ -12,7 +14,7 @@ $tempoMedio = Chamado::tempoMedioDeEspera();
   <div class="ui cards">
     <?php foreach ($listaChamados as $chamado) : ?>
       <?php $arquivo = "../fotos/" . (string) $usuario['matricula'] . ".jpg"; ?>
-      <div class="card blue">
+      <div class="card <?= $COR[$chamado["prioridade"]]?>">
         <div class="content">
           <img class="right floated mini ui image" src="../fotos/<?= is_file($arquivo) == true ? $usuario['matricula'] : 'semFoto' ?>.jpg">
 
@@ -33,7 +35,7 @@ $tempoMedio = Chamado::tempoMedioDeEspera();
             <button data-id="<?= $chamado["id"]?>" class="botao-respoderChamado ui primari basic button">
               <i class="check icon"></i>
             </button>
-            <input name="input-resposta" type="text" id="responder-chamado" placeholder="responder chamado" />
+            <input name="input-resposta" type="text" placeholder="responder chamado" />
           </div>
         </div>
       </div>
