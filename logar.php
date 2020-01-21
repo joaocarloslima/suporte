@@ -11,7 +11,7 @@ if (isset($_POST["matricula"]) && isset($_POST["senha"])){
 	$usuario->logar();
 	if ($usuario->logado){
 		$_SESSION["usuario"] = serialize($usuario);
-		if($usuario->perfil == 0){
+		if($usuario->perfil == 1 || $usuario->perfil == 2){
 			header("Location: adm/chamados.php");
 		}else{
 			header("Location: chamados.php");

@@ -40,6 +40,12 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 <?php include "rodape.php" ?>
 
 <script>
+	
+
+
+</script>
+
+<script>
   $('.ui.rating').rating();
   $('.dropdown').dropdown();
 </script>
