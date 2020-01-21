@@ -40,13 +40,36 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 <?php include "rodape.php" ?>
 
 <script>
-	
+	$('.botao-rating').click(avaliarChamado);
+
+	function avaliarChamado(){
+		const botao = $(this);
+		const id_chamado = (botao.data('id'));
+		const avaliacao = botao.rating("get rating");
+		$.ajax({
+			url: "../api/api_chamado.php",
+			method: "POST",
+			data: {
+				acao: "avaliar-chamado",
+				id: id_chamado,
+				avaliacao: avaliacao
+			},
+			success: function(){
+				console.log("funciona", avaliacao);
+			}
+		})
+	}
 
 
 </script>
 
 <script>
-  $('.ui.rating').rating();
+  $('.ui.rating')
+  	.rating({
+    	initialRating: 0,
+		maxRating: 4
+    });
+
   $('.dropdown').dropdown();
 </script>
 

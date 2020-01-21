@@ -98,6 +98,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
         interactive: false
     });
 	$('.dropdown').dropdown();
+
 </script>
 
 <style>
