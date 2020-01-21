@@ -94,7 +94,9 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 		});
 	}
 
-	$('.ui.rating').rating();
+	$('.ui.rating').rating({
+        interactive: false
+    });
 	$('.dropdown').dropdown();
 </script>
 

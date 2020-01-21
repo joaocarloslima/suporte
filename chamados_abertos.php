@@ -23,8 +23,8 @@ $chamados = $chamado->buscarChamadosAbertosPorUsuario($usuario_logado->id);
         <td class="single line"><?= $chamado["problema"] ?></td>
         <td><?= $chamado["local"] . " (" . $chamado['localSigla'] . ")" ?></td>
         <td><?= $chamado["equipamento"] . " (" . $chamado['equipamentoSigla'] . ")" ?></td>
-        <td><?= view::mostrarAbertura($chamado["dataAbertura"]) ?></td>
-        <td><?= view::mostrarPrioridade($chamado["prioridade"]) ?></td>
+        <td><?= View::mostrarAbertura($chamado["dataAbertura"]) ?></td>
+        <td><?= View::mostrarPrioridade($chamado["prioridade"]) ?></td>
       </tr>
     <?php endforeach ?>
   </tbody>
