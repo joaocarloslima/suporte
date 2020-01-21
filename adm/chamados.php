@@ -56,9 +56,21 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 			success: function(novoSpanPrioridade) {
 				novoSpanPrioridade = $.parseHTML(novoSpanPrioridade);
 				$(novoSpanPrioridade).on('click', alterarPrioridade);
+				const card = span.parents(".card");
 				span.replaceWith(novoSpanPrioridade);
+				const cor = pegarCor($(novoSpanPrioridade));
+				card.removeClass('red').removeClass('yellow').removeClass('green').addClass(cor);
 			}
 		});
+	}
+
+	function pegarCor(elemento){
+		const icone = elemento.children("i");
+		let cor = "";
+		if (icone.hasClass("red")) cor="red";
+		if (icone.hasClass("green")) cor="green";
+		if (icone.hasClass("yellow")) cor="yellow";
+		return cor;
 	}
 
 	$('.botao-respoderChamado').click(enviarResposta);
