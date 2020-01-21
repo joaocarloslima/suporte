@@ -26,7 +26,7 @@ $tempoMedio = Chamado::tempoMedioDeEspera();
           <span class="right floated">
             <td><?= View::mostrarPrioridade($chamado["prioridade"], $chamado["id"]) ?></td>
           </span>
-          <i class="clock outline icon"></i><?= View::tempoDeEspera($chamado["dataAbertura"]) ?>
+          <i class="clock outline icon"></i><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], date("Y-m-d H:i:s")) ?>
         </div>
         <div class="extra content">
           <div class="ui large transparent left icon input">

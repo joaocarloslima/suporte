@@ -194,9 +194,34 @@ class Chamado{
 	    }
 	}
 
+	public static function qtdeChamadosAbertosPorUsuario($idUsuario){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM chamados WHERE dataFechamento IS NULL AND idUsuario=:idUsuario";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":idUsuario", $idUsuario);
+		$stmt->execute();
+		return $stmt->rowCount();
+	}
+
+	public static function qtdeChamadosFechadosPorUsuario($idUsuario){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM chamados WHERE dataFechamento IS NOT NULL AND idUsuario=:idUsuario";
+		$stmt = $conexao->prepare($query);
+		$stmt->bindValue(":idUsuario", $idUsuario);
+		$stmt->execute();
+		return $stmt->rowCount();
+	}
+
 	public static function qtdeChamadosAbertos(){
 		$conexao = Conexao::pegarConexao();
 		$query = "SELECT * FROM chamados WHERE dataFechamento IS NULL";
+		$stmt = $conexao->query($query);
+		return $stmt->rowCount();
+	}
+
+	public static function qtdeChamadosFechados(){
+		$conexao = Conexao::pegarConexao();
+		$query = "SELECT * FROM chamados WHERE dataFechamento IS NOT NULL";
 		$stmt = $conexao->query($query);
 		return $stmt->rowCount();
 	}
