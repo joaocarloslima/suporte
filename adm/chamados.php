@@ -23,10 +23,6 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 	<div class="three wide column"><?php include "menu_chamados.php" ?></div>
 	<div class="thirteen wide column">
 		<?php
-		mostrarNotificacao('red');
-		mostrarNotificacao('green');
-		?>
-		<?php
 		if (isset($_GET["f"]) && $_GET["f"] == "a") include "chamados_abertos.php";
 		if (isset($_GET["f"]) && $_GET["f"] == "f") include "chamados_fechados.php";
 		if (isset($_GET["f"]) && $_GET["f"] == "n") include "chamados_criar.php";
@@ -40,6 +36,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 <?php include "rodape.php" ?>
 
 <script>
+
 	//atualizar prioridade via ajax
 	$('.botao-prioridade').click(alterarPrioridade);
 
@@ -78,7 +75,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 	function enviarResposta(){
 		const botao = $(this);
 		const id_chamado = (botao.data('id'));
-		const respostaChamado = botao.next().val();	
+		const respostaChamado = botao.next().val();
 		$.ajax({
 			url: "../api/api_chamado.php",
 			method: "POST",
@@ -88,8 +85,9 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 				solucao: respostaChamado
 			},
 			success: function(){
-				botao.next().hide()
+				botao.next().hide();
 				botao.hide();
+				botao.prev().show();
 			}
 		});
 	}
@@ -99,10 +97,17 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
     });
 	$('.dropdown').dropdown();
 
+	$('.aviso-fechamento').hide();
+
+
 </script>
 
 <style>
 	.botao-prioridade {
+		cursor: pointer;
+	}
+
+	.botao-respoderChamado{
 		cursor: pointer;
 	}
 </style>

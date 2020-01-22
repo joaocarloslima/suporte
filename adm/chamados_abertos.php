@@ -32,9 +32,10 @@ $COR = array("red", "yellow", "green");
         </div>
         <div class="extra content">
           <div class="ui large transparent left icon input">
-            <button data-id="<?= $chamado["id"]?>" class="botao-respoderChamado ui primari basic button">
+            <span class="header aviso-fechamento">CHAMADO FECHADO</span>
+            <span data-id="<?= $chamado["id"]?>" class="botao-respoderChamado">
               <i class="check icon"></i>
-            </button>
+            </span>
             <input name="input-resposta" type="text" placeholder="responder chamado" />
           </div>
         </div>

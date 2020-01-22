@@ -22,8 +22,8 @@ if(isset($_POST["acao"])){
 
     if($_POST["acao"] == 'avaliar-chamado'){
         $chamado = new Chamado();
-        $chamado->id = $_POST["id"];
         $chamado->carregar();
+        $chamado->id = $_POST["id"];
         $chamado->avaliacao = $_POST["avaliacao"];
         $chamado->atualizar();
     }
