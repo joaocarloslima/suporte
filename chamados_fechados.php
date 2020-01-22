@@ -28,7 +28,7 @@ $chamados = $chamado->buscarChamadosFechadosPorUsuario($usuario_logado->id);
         <td><?= $chamado["solucao"] ?></td>
         <td><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], $chamado["dataFechamento"])?></td>
         <td>
-          <div class="ui star rating" data-rating="<?= $chamado["avaliacao"] ?>"></div>
+          <div data-id="<?=$chamado["id"]?>" class="ui star rating botao-rating" data-rating="<?= $chamado["avaliacao"] ?>"></div>
         </td>
       </tr>
     <?php endforeach ?>
