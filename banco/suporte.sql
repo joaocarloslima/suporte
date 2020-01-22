@@ -27,6 +27,9 @@ SET time_zone = "+00:00";
 --
 -- Estrutura da tabela `chamados`
 --
+CREATE DATABASE suporte;
+USE suporte;
+
 
 CREATE TABLE `chamados` (
   `id` int(11) NOT NULL,

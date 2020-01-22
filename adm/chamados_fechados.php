@@ -15,7 +15,7 @@ $chamados = $chamado->buscarTodosChamadosFechados();
     <th>Equipamento</th>
     <th>Solução</th>
     <th>Tempo de Atendimento</th>
-    <th>Avaliar</th>
+    <th>Avaliação</th>
     </tr>
   </thead>
   <tbody>
@@ -29,7 +29,7 @@ $chamados = $chamado->buscarTodosChamadosFechados();
         <td><?= $chamado["solucao"] ?></td>
         <td><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], $chamado["dataFechamento"])?></td>
         <td>
-        <div class="ui star rating" data-rating="<?= $chamado["avaliacao"] > 4?"4":$chamadaEquipamento["avaliacao"] ?>"></div>
+        <div class="ui star rating" data-rating = "<?= $chamado["avaliacao"]?>"> </div>
 
         </td>
       </tr>
