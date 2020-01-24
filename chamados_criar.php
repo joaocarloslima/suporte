@@ -11,7 +11,7 @@ $equipamentos = $equipamento->buscarTodos();
 
 ?>
 
-<form class="ui form" action="chamados.php?f=a" method="POST">
+<form class="ui form" action="chamados?f=a" method="POST">
   <div class="fields">
     <div class="four wide field required">
       <label>Local</label>

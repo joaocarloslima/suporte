@@ -1,3 +1,5 @@
+<?php $url = $_SERVER["PATH_INFO"] ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +11,10 @@
 <body>
 	<h1>Sistema de Suporte - ETECIA</h1>
 <div class="ui secondary pointing menu">
-  <a href="chamados.php" class="item <?php echo (basename($_SERVER['PHP_SELF'])=='chamados.php')?'active':''; ?>">
+  <a href="chamados" class="item <?= ($url=='/chamados')?'active':'' ?>">
     Chamados
   </a>
-  <a href="perfil.php" class="item <?php echo (basename($_SERVER['PHP_SELF'])=='perfil.php')?'active':''; ?>">
+  <a href="perfil" class="item <?= ($url=='/perfil')?'active':'' ?>">
     Perfil
   </a>
   <div class="right menu">
