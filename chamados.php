@@ -50,7 +50,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 			url: "../api/api_chamado.php",
 			method: "POST",
 			data: {
-				acao: "avaliar-chamado",
+				acao: "avaliar_chamado",
 				id: id_chamado,
 				avaliacao: avaliacao
 			},

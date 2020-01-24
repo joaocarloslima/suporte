@@ -70,6 +70,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 		return cor;
 	}
 
+	// Resposta do chamado 
 	$('.botao-respoderChamado').click(enviarResposta);
 
 	function enviarResposta(){
@@ -92,12 +93,37 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 		});
 	}
 
+	// Reabrir chamado 
+	$(".botao-reabrirChamado").click(reabrirChamado);
+
+	function reabrirChamado(){
+		const span = $(this);
+		const id_chamado = (span.data('id'));
+		$.ajax({
+			url: "../api/api_chamado.php",
+			method: "POST",
+			data: {
+				acao: "reabrir_chamado",
+				id: id_chamado
+			},
+			success: function(){
+				span.hide();
+				span.prev().show();
+			}
+		});
+	}
+
+
+	$('.aviso-fechamento').hide();
+
+	$('.aviso-reabertura').hide();
+
 	$('.ui.rating').rating({
         interactive: false
     });
+
 	$('.dropdown').dropdown();
 
-	$('.aviso-fechamento').hide();
 
 
 </script>
@@ -108,6 +134,10 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 	}
 
 	.botao-respoderChamado{
+		cursor: pointer;
+	}
+
+	.botao-reabrirChamado{
 		cursor: pointer;
 	}
 </style>

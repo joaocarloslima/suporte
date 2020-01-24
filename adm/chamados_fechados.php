@@ -16,6 +16,7 @@ $chamados = $chamado->buscarTodosChamadosFechados();
     <th>Solução</th>
     <th>Tempo de Atendimento</th>
     <th>Avaliação</th>
+    <th>Reabrir chamado</th>
     </tr>
   </thead>
   <tbody>
@@ -30,8 +31,13 @@ $chamados = $chamado->buscarTodosChamadosFechados();
         <td><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], $chamado["dataFechamento"])?></td>
         <td>
         <div class="ui star rating" data-rating = "<?= $chamado["avaliacao"]?>"> </div>
-
         </td>
+        <td>
+            <span class="single line aviso-reabertura">CHAMADO REABERTO</span>
+            <span class="botao-reabrirChamado" data-tooltip="reabrir chamado" data-id="<?= $chamado["id"]?>">
+              <i class="large undo alternate icon"></i>
+            </span>
+        </td> 
       </tr>
     <?php endforeach ?>
   </tbody>

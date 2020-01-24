@@ -20,11 +20,20 @@ if(isset($_POST["acao"])){
         $chamado->atualizar();
     }
 
-    if($_POST["acao"] == 'avaliar-chamado'){
+    if($_POST["acao"] == 'avaliar_chamado'){
         $chamado = new Chamado();
-        $chamado->carregar();
         $chamado->id = $_POST["id"];
+        $chamado->carregar();
         $chamado->avaliacao = $_POST["avaliacao"];
+        $chamado->atualizar();
+    }
+
+    if($_POST["acao"] == 'reabrir_chamado'){
+        $chamado = new Chamado();
+        $chamado->id = $_POST["id"];
+        $chamado->carregar();
+        $chamado->dataFechamento = NULL;
+        $chamado->solucao = NULL;
         $chamado->atualizar();
     }
 }
