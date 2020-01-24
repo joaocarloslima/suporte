@@ -1,4 +1,7 @@
-<?php $url = $_SERVER["PATH_INFO"] ?>
+<?php 
+$url = $_SERVER["PATH_INFO"];
+$url_array = explode("/",$url);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -11,10 +14,10 @@
 <body>
 	<h1>Sistema de Suporte - ETECIA</h1>
 <div class="ui secondary pointing menu">
-  <a href="chamados" class="item <?= ($url=='/chamados')?'active':'' ?>">
+  <a href="chamados" class="item <?= (in_array('chamados', $url_array))?'active':'' ?>">
     Chamados
   </a>
-  <a href="perfil" class="item <?= ($url=='/perfil')?'active':'' ?>">
+  <a href="perfil" class="item <?= (in_array('perfil', $url_array))?'active':'' ?>">
     Perfil
   </a>
   <div class="right menu">

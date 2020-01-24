@@ -59,7 +59,7 @@ mostrarNotificacao('green');
 		</div>
 		<div class="column">
 
-		<form class="ui form" action="perfil.php" method="POST">
+		<form class="ui form" action="perfil" method="POST">
 			<input type="hidden" name="id" value="<?= $usuario->id?>">
 			<div class="four wide field">
 				<label>Mudar senha</label>
