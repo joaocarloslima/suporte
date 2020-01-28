@@ -1,7 +1,7 @@
 <?php 
 
 if (!isset($_SERVER["PATH_INFO"])) {
-	require("login.php");
+	require("../login.php");
 	exit();
 }
 
@@ -14,13 +14,26 @@ switch ($_SERVER["PATH_INFO"]) {
  		require("perfil.php");
  		break;
 
- 	case '/tipos':
- 		require("tipos.php");
- 		break;
+	case '/usuarios':
+		require("usuarios.php");
+	break;
 
- 	case '/alternativas':
- 		require("alternativas.php");
- 		break;
+	case '/locais':
+		require("locais.php");
+	break;
+
+	case '/equipamentos':
+		require("equipamentos.php");
+	break;
+
+	case '/chamado_por_equipamento':
+		require("chamado_por_equipamento.php");
+	break;
+
+	case '/equipamentos_por_local':
+		require("equipamentos_por_local.php");
+	break;
+
 
  	default:
  		echo "Erro 404 - página não encontrada";
