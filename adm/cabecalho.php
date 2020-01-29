@@ -1,7 +1,9 @@
 <?php
 
 session_start();
-if(!isset($_SESSION) || !$_SESSION["usuario"]){
+
+if(!isset($_SESSION) || !$_SESSION["usuario"] || $_SESSION["isadmin"] == 0){
+    $_SESSION["red"] = "Desculpe, acesso negado";
     header("Location: /");
     exit();
 }
@@ -42,7 +44,7 @@ $url_array = explode("/", $url);
       Perfil
     </a>
     <div class="right menu">
-      <a href="../logar.php" class="ui item">
+      <a href="../logar" class="ui item">
         Sair
       </a>
     </div>

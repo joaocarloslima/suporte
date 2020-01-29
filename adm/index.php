@@ -34,6 +34,10 @@ switch ($_SERVER["PATH_INFO"]) {
 		require("equipamentos_por_local.php");
 	break;
 
+	case '/logar':
+		require("../logar.php");
+	break;
+
 
  	default:
  		echo "Erro 404 - página não encontrada";
