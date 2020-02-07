@@ -1,4 +1,11 @@
-<?php 
+<?php
+
+session_start();
+if(!isset($_SESSION) || !$_SESSION["usuario"]){
+    header("Location: /");
+    exit();
+}
+
 $url = $_SERVER["PATH_INFO"];
 $url_array = explode("/",$url);
 ?>

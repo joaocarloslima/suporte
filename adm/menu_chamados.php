@@ -4,15 +4,15 @@ if (isset($_GET["f"]) && $_GET["f"]=="f") $active_fechado = "active"; else $acti
 if (isset($_GET["f"]) && $_GET["f"]=="n") $active_novo = "active"; else $active_novo = "";
 ?>
 <div class="ui vertical menu pointing">
-  <a href="chamados.php?f=a" class="teal item <?= $active_aberto?>">
+  <a href="chamados?f=a" class="teal item <?= $active_aberto?>">
     Abertos
     <div class="ui teal left label"><?= Chamado::qtdeChamadosAbertos()?></div>
   </a>
-  <a href="chamados.php?f=f" class="item <?= $active_fechado?>">
+  <a href="chamados?f=f" class="item <?= $active_fechado?>">
     Fechados
     <div class="ui label"><?= Chamado::qtdeChamadosFechados()?></div>
   </a>
-  <a href="chamados.php?f=n" class="item <?= $active_novo?>">
+  <a href="chamados?f=n" class="item <?= $active_novo?>">
     Novo
   </a>
 </div>
