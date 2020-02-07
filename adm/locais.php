@@ -51,7 +51,8 @@ mostrarNotificacao('green');
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($locais as $local) : ?>
+        <?php foreach ($locais as $local) : 
+            $local["nome"] = utf8_encode($local["nome"])?>
             <tr>
                 <td class="center aligned"><?= $local["id"] ?></td>
                 <td class="single line"><?= $local["nome"] ?></td>
