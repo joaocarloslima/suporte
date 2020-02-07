@@ -19,7 +19,7 @@ $COR = array("red", "yellow", "green");
           <img class="right floated mini ui image" src="../fotos/<?= is_file($arquivo) == true ? $usuario['matricula'] : 'semFoto' ?>.jpg">
 
           <div class="header"><?= $chamado["usuario"] ?></div>
-          <div class="meta"><?= $chamado["local"] . " - " . $chamado["equipamentoSigla"] ?> </div>
+          <div class="meta"><?= utf8_encode($chamado["local"]) . " - " . $chamado["equipamentoSigla"] ?> </div>
           <div class="description">
             <?= $chamado["problema"] ?>
           </div>

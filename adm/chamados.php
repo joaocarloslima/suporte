@@ -36,9 +36,35 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 <?php include "rodape.php" ?>
 
 <script>
-
 	//atualizar prioridade via ajax
 	$('.botao-prioridade').click(alterarPrioridade);
+
+	$('#campo-local').change(function() {
+		let local = $("#idLocal").val();
+		$.ajax({
+			url: "../api/api_equipamentos.php",
+			method: "POST",
+			data: {
+				acao: "filtrar_por_local",
+				idLocal: local
+			},
+			success: function(lista) {
+				$("#menu-equipamentos").html("");
+
+				var obj = JSON.parse(lista);
+
+				obj.forEach(function(o, index) {
+					$('<div>', {
+						class: 'item',
+						'data-value': o.id,
+						'data-text': o.descricao + " (" + o.sigla + ")",
+						html: o.descricao + " (" + o.sigla + ")",
+					}).appendTo("#menu-equipamentos");
+				});
+			}
+		});
+
+	});
 
 	function alterarPrioridade() {
 		const span = $(this);
@@ -61,19 +87,19 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 		});
 	}
 
-	function pegarCor(elemento){
+	function pegarCor(elemento) {
 		const icone = elemento.children("i");
 		let cor = "";
-		if (icone.hasClass("red")) cor="red";
-		if (icone.hasClass("green")) cor="green";
-		if (icone.hasClass("yellow")) cor="yellow";
+		if (icone.hasClass("red")) cor = "red";
+		if (icone.hasClass("green")) cor = "green";
+		if (icone.hasClass("yellow")) cor = "yellow";
 		return cor;
 	}
 
 	// Resposta do chamado 
 	$('.botao-respoderChamado').click(enviarResposta);
 
-	function enviarResposta(){
+	function enviarResposta() {
 		const botao = $(this);
 		const id_chamado = (botao.data('id'));
 		const respostaChamado = botao.next().val();
@@ -85,7 +111,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 				id: id_chamado,
 				solucao: respostaChamado
 			},
-			success: function(){
+			success: function() {
 				botao.next().hide();
 				botao.hide();
 				botao.prev().show();
@@ -96,7 +122,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 	// Reabrir chamado 
 	$(".botao-reabrirChamado").click(reabrirChamado);
 
-	function reabrirChamado(){
+	function reabrirChamado() {
 		const span = $(this);
 		const id_chamado = (span.data('id'));
 		$.ajax({
@@ -106,7 +132,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 				acao: "reabrir_chamado",
 				id: id_chamado
 			},
-			success: function(){
+			success: function() {
 				span.hide();
 				span.prev().show();
 			}
@@ -119,13 +145,10 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 	$('.aviso-reabertura').hide();
 
 	$('.ui.rating').rating({
-        interactive: false
-    });
+		interactive: false
+	});
 
 	$('.dropdown').dropdown();
-
-
-
 </script>
 
 <style>
@@ -133,11 +156,11 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 		cursor: pointer;
 	}
 
-	.botao-respoderChamado{
+	.botao-respoderChamado {
 		cursor: pointer;
 	}
 
-	.botao-reabrirChamado{
+	.botao-reabrirChamado {
 		cursor: pointer;
 	}
 </style>

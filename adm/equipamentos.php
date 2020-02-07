@@ -71,7 +71,7 @@ mostrarNotificacao('green');
                 <td><?= $equipamento["sigla"] ?></td>
                 <td><?= $equipamento["patrimonio"] ?></td>
                 <td><?= $equipamento["tipo"] ?></td>
-                <td><?= $equipamento["local"] ?></td>
+                <td><?= utf8_encode($equipamento["local"]) ?></td>
                 <td>
                     <div class="ui small basic icon buttons">
                         <a href="chamado_por_equipamento?idEquipamento=<?= $equipamento["id"]?>&sigla=<?=$equipamento["sigla"]?> "><button class="ui button" data-tooltip="ver chamados do equipamento" onclick="chamadosEquipamento('<?=$equipamento["id"] ?>')"><i class="comment icon"></i></button></a>
