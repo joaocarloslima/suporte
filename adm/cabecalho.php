@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>ETECIA - Suporte</title>
+  <meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="../semanticui/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="../semanticui/suporte.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
