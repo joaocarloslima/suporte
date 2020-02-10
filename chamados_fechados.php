@@ -23,7 +23,7 @@ $chamados = $chamado->buscarChamadosFechadosPorUsuario($usuario_logado->id);
       <tr>
         <td><?= $chamado["id"] ?></td>
         <td class="single line"><?= $chamado["problema"] ?></td>
-        <td><?= $chamado["local"] . " (" . $chamado['localSigla'] . ")" ?></td>
+        <td><?= utf8_encode($chamado["local"]) . " (" . $chamado['localSigla'] . ")" ?></td>
         <td><?= $chamado["equipamento"] . " (" . $chamado['equipamentoSigla'] . ")" ?></td>
         <td><?= $chamado["solucao"] ?></td>
         <td><?= View::mostrarTempoDeAtendimento($chamado["dataAbertura"], $chamado["dataFechamento"])?></td>

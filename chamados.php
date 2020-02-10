@@ -42,6 +42,33 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 <script>
 	$('.botao-rating').click(avaliarChamado);
 
+	$('#campo-local').change(function() {
+		let local = $("#idLocal").val();
+		$.ajax({
+			url: "../api/api_equipamentos.php",
+			method: "POST",
+			data: {
+				acao: "filtrar_por_local",
+				idLocal: local
+			},
+			success: function(lista) {
+				$("#menu-equipamentos").html("");
+
+				var obj = JSON.parse(lista);
+
+				obj.forEach(function(o, index) {
+					$('<div>', {
+						class: 'item',
+						'data-value': o.id,
+						'data-text': o.descricao + " (" + o.sigla + ")",
+						html: o.descricao + " (" + o.sigla + ")",
+					}).appendTo("#menu-equipamentos");
+				});
+			}
+		});
+
+	});
+
 	function avaliarChamado(){
 		const botao = $(this);
 		const id_chamado = (botao.data('id'));
@@ -55,7 +82,7 @@ if (isset($_POST["problema"]) && $_POST["idLocal"] != "") {
 				avaliacao: avaliacao
 			},
 			success: function(){
-				console.log("funciona", avaliacao);
+				//console.log("funciona", avaliacao);
 			}
 		})
 	}

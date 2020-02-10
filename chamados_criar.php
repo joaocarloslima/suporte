@@ -11,18 +11,18 @@ $equipamentos = $equipamento->buscarTodos();
 
 ?>
 
-<form class="ui form" action="chamados?f=a" method="POST">
+<form class="ui form" action="chamados.php?f=a" method="POST">
   <div class="fields">
     <div class="four wide field required">
       <label>Local</label>
       <div class="ui fluid search selection dropdown" id="campo-local">
-        <input type="hidden" name="idLocal">
+        <input type="hidden" name="idLocal" id="idLocal">
         <i class="dropdown icon"></i>
         <div class="default text">selecione</div>
         <div class="menu">
           <?php foreach ($locais as $local) : ?>
             <div class="item" data-value="<?= $local["id"] ?>" 
-              data-text="<?= $local["nome"] ?>"><?= $local["nome"] ?></div>
+              data-text="<?= utf8_encode($local["nome"]) ?>"><?= utf8_encode($local["nome"]) ?></div>
           <?php endforeach ?>
         </div>
       </div>
@@ -33,7 +33,7 @@ $equipamentos = $equipamento->buscarTodos();
         <input type="hidden" name="idEquipamento">
         <i class="dropdown icon"></i>
         <div class="default text">selecione</div>
-        <div class="menu">
+        <div class="menu" id="menu-equipamentos">
           <?php foreach ($equipamentos as $equipamento) : ?>
             <div class="item" data-value="<?= $equipamento["id"] ?>" 
               data-text="<?= $equipamento["descricao"] ?>"><?= $equipamento["descricao"] ?></div>
