@@ -13,10 +13,10 @@ $COR = array("red", "yellow", "green");
 <div class="ui four doubling cards">
   <div class="ui cards">
     <?php foreach ($listaChamados as $chamado) : ?>
-      <?php $arquivo = "../fotos/" . (string) $usuario['matricula'] . ".jpg"; ?>
+      <?php $arquivo = "../fotos/" . (string) $chamado['usuarioMatricula'] . ".jpg"; ?>
       <div class="card <?= $COR[$chamado["prioridade"]]?>">
         <div class="content">
-          <img class="right floated mini ui image" src="../fotos/<?= is_file($arquivo) == true ? $usuario['matricula'] : 'semFoto' ?>.jpg">
+          <img class="right floated mini ui image" src="../fotos/<?= is_file($arquivo)? $chamado['usuarioMatricula'] : 'semFoto' ?>.jpg">
 
           <div class="header"><?= $chamado["usuario"] ?></div>
           <div class="meta"><?= utf8_encode($chamado["local"]) . " - " . $chamado["equipamentoSigla"] ?> </div>
